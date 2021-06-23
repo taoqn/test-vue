@@ -18,6 +18,8 @@ pipeline {
         }
       }
       steps {
+        sh 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash'
+        sh 'nvm install v14.15.5'
         sh 'npm install'
         sh 'npm audit fix'
         sh 'npm i -g @vue/cli-service'
