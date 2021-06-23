@@ -7,4 +7,4 @@ RUN npm install && npm audit fix
 # remove build
 RUN npm run build
 # run
-CMD [ "node", "build" ]
+CMD [ "node", "server.js" ]
