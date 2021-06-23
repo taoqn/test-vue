@@ -5,6 +5,7 @@ services:
     build:
       context: .
     environment:
+      TAG_NAME: ${TAG_NAME}
       NODE_ENV: production
       PORT: 3000
     ports:
