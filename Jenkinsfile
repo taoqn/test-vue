@@ -18,12 +18,12 @@ pipeline {
         }
       }
       steps {
+        sh 'RUN apt-get update && apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common'
         sh 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash'
         sh 'nvm install v14.15.5'
         sh 'npm install'
         sh 'npm audit fix'
         sh 'npm i -g @vue/cli-service'
-        sh 'npm i -g semver'
         sh 'npm run build'
       }
     }
