@@ -6,6 +6,8 @@ const renderer = require('vue-server-renderer').createBundleRenderer(code)
 const index = fs.readFileSync(path.join(__dirname, './dist/index.html'), 'utf8')
 const app = express()
 
+console.log(process.env.TAG_NAME)
+
 const getCurrentUser = () => {
   return Promise.resolve({
     username: 'acoshift',
