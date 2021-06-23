@@ -18,7 +18,7 @@ pipeline {
     stage('Deploy') {
       when { tag "*" }
       steps {
-          sh 'docker run --name mcare-web-portal --rm --detach -d -p 3111:3000 mcare-web-portal'
+          sh 'docker run --name mcare-web-portal --rm -d -p 3111:3000 mcare-web-portal'
       }
     }
   }
