@@ -1,4 +1,6 @@
 FROM node:14-alpine
+ARG TAG_NAME
+ENV TAG_NAME=${TAG_NAME}
 WORKDIR /app
 COPY . .
 # # install app dependencies
