@@ -1,35 +1,33 @@
 pipeline {
   agent any
+  environment { 
+    BUILD_TARGET = 'true'
+    NODE_ENV = 'production'
+    PORT = '3000'
+  }
   stages {
     stage('preflight') {
       steps {
         echo sh(returnStdout: true, script: 'env')
-        sh 'node -v'
-      }
-    }
-    stage('install') {
-      steps {
-        sh 'npm --version'
-        sh 'git log --reverse -1'
-        sh 'npm install && npm audit fix'
-      }
-    }
-    stage('test') {
-      steps {
-        sh 'npm test'
       }
     }
     stage('build') {
+      agent {
+        docker {
+            image 'node:14-alpine'
+        }
+      }
       steps {
-        sh 'npm --version'
-        sh 'git log --reverse -1'
+        sh 'npm i -g @vue/cli-service'
+        sh 'npm install'
+        sh 'npm audit fix'
         sh 'npm run build'
       }
     }
     stage('Deploy') {
       when { tag "*" }
       steps {
-          echo 'Deploying only because this commit is tagged...'
+          sh 'docker-compose up --build -d --remove-orphans'
       }
     }
   }
