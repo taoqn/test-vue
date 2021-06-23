@@ -1,7 +1,6 @@
 pipeline {
   agent any
   environment { 
-    BUILD_TARGET = 'true'
     NODE_ENV = 'production'
     PORT = '3000'
   }
@@ -13,13 +12,13 @@ pipeline {
     }
     stage('build') {
       steps {
-        sh 'docker build -t myjenkins-blueocean .'
+        sh 'docker build -t mcare-web-portal --build-arg TAG_NAME .'
       }
     }
     stage('Deploy') {
       when { tag "*" }
       steps {
-          sh 'docker run --name jenkins-blueoce --rm --detach -d -p 3000:3000 myjenkins-blueocean'
+          sh 'docker run --name mcare-web-portal --rm --detach -d -p 3111:3000 mcare-web-portal'
       }
     }
   }
