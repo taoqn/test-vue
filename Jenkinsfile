@@ -20,7 +20,8 @@ pipeline {
       steps {
         sh 'npm install'
         sh 'npm audit fix'
-        sh 'npm i -g @vue/cli'
+        sh 'npm i -g @vue/cli-service'
+        sh 'npm i -g semver'
         sh 'npm run build'
       }
     }
